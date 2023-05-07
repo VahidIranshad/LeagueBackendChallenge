@@ -200,7 +200,7 @@ namespace LeagueBackendChallengeTest.Controllers
         /// error == Expected
         /// </summary>
         [Fact]
-        public async Task Echo_WrongData_GetErrorNotSquare()
+        public async Task Echo_NotSquareData_GetErrorNotSquare()
         {
 
             var client = this.GetNewClient();
@@ -212,6 +212,26 @@ namespace LeagueBackendChallengeTest.Controllers
             
             Assert.Equal("BadRequest", statusCode);
             Assert.Equal("error The file is not square", result);
+        }
+
+
+        /// <summary>
+        /// Check For Worng Data that is not number For Multiply or Sum Method
+        /// error == Expected
+        /// </summary>
+        [Fact]
+        public async Task Sum_NotNumberData_GetErrorNotSquare()
+        {
+
+            var client = this.GetNewClient();
+            var content = CreateCsvContentForTest(new List<List<string>> { new List<string> { "1", "2" }, new List<string> { "3", "B" }, });
+            var response = await client.PostAsync("/api/Main/Sum", content);
+            var statusCode = response.StatusCode.ToString();
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<string>(stringResponse);
+
+            Assert.Equal("BadRequest", statusCode);
+            Assert.Equal("error The format of some data is not correct", result);
         }
 
 
