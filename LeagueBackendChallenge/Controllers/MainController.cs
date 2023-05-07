@@ -121,11 +121,11 @@ namespace LeagueBackendChallenge.Controllers
         {
             try
             {
-                var rows = await _readDataFromFile.GetDataFromFile(file);
+                var rows = await _readDataFromFile.GetNumbersFromFile(file);
                 long result = 0;
                 foreach (var row in rows)
                 {
-                    result += row.Select(p => Convert.ToInt64(p)).Sum();
+                    result += row.Select(p => p).Sum();
                 }
 
                 return Ok(result);
@@ -148,14 +148,14 @@ namespace LeagueBackendChallenge.Controllers
         {
             try
             {
-                var rows = await _readDataFromFile.GetDataFromFile(file);
+                var rows = await _readDataFromFile.GetNumbersFromFile(file);
                 //First value must be set by one
                 long result = 1;
                 foreach (var row in rows)
                 {
                     foreach (var value in row)
                     {
-                        result *= Convert.ToInt64(value);
+                        result *= value;
                     }
                 }
 

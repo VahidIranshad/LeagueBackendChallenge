@@ -8,5 +8,10 @@ namespace LeagueBackendChallenge.Utility
         {
             throw new NotImplementedException();
         }
+
+        public Task<List<List<long>>> GetNumbersFromFile(IFormFile file)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
